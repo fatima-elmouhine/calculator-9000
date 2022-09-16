@@ -1,6 +1,5 @@
 <?php
 
-// include_once('core.php');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 
@@ -19,10 +18,8 @@ if($info !== null){
 }
 
 
+echo json_encode('bien supprimé');
 
-
-    echo json_encode('bien supprimé');
-// }
 
 
 
