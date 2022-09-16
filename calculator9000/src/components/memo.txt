@@ -1,0 +1,3 @@
+
+gerer les priorité de parenthèse
+probleme quand je rentre 2 signe j'ai le calcul qui est fait

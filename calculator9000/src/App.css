@@ -1,0 +1,189 @@
+body {
+    background: rgba(166, 165, 165, 0.418);
+    display: flex;
+    justify-content: center;
+}
+
+.App {
+    background-color: #dadada;
+    margin: 20% 0;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.881);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+h1 {
+    padding: 30px;
+    margin: 0;
+    color: #d2ceda;
+    /* text-align: center; */
+    background-color: #8d388a;
+    position: absolute;
+    font-size: 1.5em;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.beautifulScreen {
+    font-size: calc(10px + 2vmin);
+    color: white;
+    padding: 0 50px;
+    /* background: rgb(239, 225, 241); */
+    background-color: rgb(239 238 239);
+    border-radius: 20px;
+    max-width: 435px;
+    /* max-height: 190px; */
+    overflow-y: scroll;
+}
+
+.calcul {
+    /* background : white; */
+    color: #bdb2d2;
+    border-radius: 10px;
+    padding-top: 15px;
+    font-size: calc(10px + 2vmin);
+    word-break: break-all;
+}
+
+.result {
+    /* background : rgb(247, 192, 247); */
+    color: #6e6f72;
+    /* padding: 10px; */
+    border-radius: 10px;
+    font-size: 2.1em;
+    word-break: break-all;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons .numbers {
+    display: grid;
+    grid-template-columns: repeat(3, 75px);
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    margin-left: 25px;
+}
+
+.buttons .operators {
+    display: grid;
+    grid-template-columns: repeat(2, 75px);
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    margin-left: 25px;
+}
+
+.btn {
+    /* padding: 25px; */
+    text-align: center;
+    /* background-color: #efefef; */
+    /* border: none; */
+    border-radius: 100%;
+    color: #b998f3;
+    /* font-size: 2.4em; */
+    font-size: 1.7em;
+    font-weight: bold;
+    border: none;
+    min-width: 75px;
+    min-height: 75px;
+    box-shadow: 1px 1px 1px 1px rgb(198, 181, 181);
+    cursor: pointer;
+}
+
+.btn:active {
+    /*Clicked and held*/
+    box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-number {
+    color: #4e3d4ce8;
+}
+
+.btn:hover {
+    background-color: #b998f3;
+    color: white;
+    transition: 0.2s ease-in-out;
+}
+
+.msgOver {
+    color: #8d388a;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.resultRow {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    margin: 0;
+    color: #8d388a;
+    font-size: 1.5em;
+}
+
+.eyeClose {
+    background-color: #b998f3;
+    color: #ffffff;
+}
+
+.savedCalcul {
+  background: #b998f3;
+  /* position: absolute; */
+  display: flex;
+  flex-direction: column;
+  /* bottom: -62%; */
+  padding: 18px 23%;
+  align-items: end;
+  border-radius: 5px;
+  animation: slide 0.51s ease-in;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.resultRow {
+    color: white;
+}
+
+.resultRow span {
+    display: flex;
+    gap: 10px;
+    justify-content: center;  
+    align-items: center;
+}
+
+.btn-mark {
+    min-width: 49.24px;
+    min-height: 56.24px;
+    color: rgb(183, 148, 148);
+
+}
+
+.btn-mark:hover {
+    color: rgb(151, 47, 47);
+    background-color: white;
+}
+
+@keyframes slide {
+    0% {
+        position: absolute;
+        bottom: 50%;
+    }
+    100% {
+        bottom: 0%
+    }
+}
