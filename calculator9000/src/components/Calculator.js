@@ -127,16 +127,10 @@ export default function Calculator() {
                 ...prevStateInfo,
                 calcul:" "+ prevStateInfo.result,
                 prevCalcul: prevStateInfo.calcul,
-                // number: 0,
-                // result: 0
             }
         })
-        
     }
-    // // React.useEffect(() => {
-    // //         handleRead()
-    // //         , [savedCalcul]); //])
-    // // })
+
     React.useEffect(() => {
         fetch('http://localhost:8888/calculator-9000/api/saveCalc.php',{
             method: 'POST',
@@ -146,8 +140,6 @@ export default function Calculator() {
             body: JSON.stringify(screenInfo),
         })
         .then(()=>{
-            // handleRead()
-            // setIsSaved(!isSaved)
             setIsShow(!isShow)
         })
 
