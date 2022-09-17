@@ -10,7 +10,7 @@ import PreviousResult from './PreviousResult';
 
 export default function Calculator() {
 
-    //STATE
+    // ------------------------------------------STATE
     const [screenInfo, setScreenInfo] = React.useState({
         calcul: "0",
         prevCalcul: "",
@@ -23,7 +23,7 @@ export default function Calculator() {
     const [isSaved, setIsSaved] = React.useState(false);
 
 
-    //  NUMBERS BUTTONS
+    // ------------------------------------------ NUMBERS BUTTONS
     const AmazingNumberButtons = [];
     for (let i = 9; i >= 0 ; i--) {
         AmazingNumberButtons.push(<AmazingNumberButton key={i}
@@ -52,18 +52,24 @@ export default function Calculator() {
 
             number={i}  />);
     }
+
+
+
+
+    // ------------------------------------------ BUTTONS FOR DELETE AND SAVED CALCULS
     var eyeClose = <i className="fa-solid fa-eye-slash"></i>
     var eyeOpen = <i className="fa-regular fa-eye"></i>
 
      AmazingNumberButtons.push(<button key="19" className='btn' onClick={handleDelete}> <i className="fa-solid fa-trash"></i></button> )
      savedCalcul.length!== 0 && AmazingNumberButtons.push(<button key="20" className={(isShow && savedCalcul.length !== 0  )? 'btn eyeClose' : 'btn eyeOpen'} onClick={handleRead}> {isShow && savedCalcul.length !== 0  ? eyeClose : eyeOpen}</button> )
 
-    //  OPERATOR BUTTONS
 
+
+
+    // ------------------------------------------OPERATOR BUTTONS
     const GreatOperationButtons = ["+", "-", "*", "/", ".", "C"];
     const GreatOperation = GreatOperationButtons.map((index, operation) => {
         return <GreatOperationButton handle={()=>{
-
 
             var strCalcul = screenInfo.calcul
             var lastChar = strCalcul.charAt(strCalcul.length-1)
@@ -115,9 +121,12 @@ export default function Calculator() {
             }}
 
             key={index} operation={index} />;
-
     });
-    
+
+
+
+
+    // ------------------------------------------HANDLE EQUAL BUTTON
     function handleEqual() {
     if(screenInfo.calcul.includes("+") || screenInfo.calcul.includes("-") || screenInfo.calcul.includes("*") || screenInfo.calcul.includes("/")){
         setIsOperator(true);
@@ -131,20 +140,35 @@ export default function Calculator() {
         })
     }
 
+
+
+
+    // ------------------------------------------USE EFFECT TO UPDATE THE TABLE OF SAVED CALCULS
     React.useEffect(() => {
-        fetch('http://localhost:8888/calculator-9000/api/saveCalc.php',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(screenInfo),
+        fetch("http://localhost:8888/calculator-9000/api/getCalc.php")
+        .then(response => {
+            if(response.status === 200){
+                return response.json()
+            }
         })
-        .then(()=>{
-            setIsShow(!isShow)
+        .then((data)=>{
+            console.log(data.length);
+            if(data.length > 0){
+                setSavedCalcul(data);
+                setIsShow(true)
+            }
+            // isSaved(true)
+            // setIsShow(true)
+            // handleRead();
+
         })
 
-    }, [isSaved]);
+    }, []);
 
+
+
+
+    // ------------------------------------------HANDLE SAVE CALCUL BUTTON
     function handleSave(){
         if(screenInfo.calcul !== "0" ){
             fetch('http://localhost:8888/calculator-9000/api/saveCalc.php',{
@@ -156,14 +180,19 @@ export default function Calculator() {
             })
             .then(()=>{
                 handleRead()
+                setIsShow(true)
                 // setIsSaved(!isSaved)
-                setIsShow(!isShow)
+                // setIsShow(!isShow)
             })
         }else{
             alert("il n'ya rien à sauvegarder")
         }
-}
+    }
 
+
+
+
+    // ------------------------------------------HANDLE READ BUTTON : SHOW PREVIOUSLY SAVED CALCUL
      function handleRead(){
         setIsShow(!isShow)
         fetch("http://localhost:8888/calculator-9000/api/getCalc.php")
@@ -179,6 +208,9 @@ export default function Calculator() {
     }
 
 
+
+
+    // ------------------------------------------HANDLE DELETE BUTTON
     function handleDelete(id){
         if(typeof id == "string"){
             fetch('http://localhost:8888/calculator-9000/api/deleteCalc.php',{
@@ -211,6 +243,9 @@ export default function Calculator() {
 
     }
 
+
+
+
   return (
     <div className='calculator'>
         <BeautifulScreen result={screenInfo.result} number={screenInfo.calcul} />
@@ -224,7 +259,6 @@ export default function Calculator() {
             <MagnificientEqualButton handleEqual={handleEqual} />
         </div>
         </div>
-        
             {(screenInfo.result >= 9000 && isOperator) && <ItSOverNineThousand />}
            {savedCalcul.length !== 0 && <div  className={isShow ?'savedCalcul' : ''}>
                 {savedCalcul.map((singleData, index) => {
